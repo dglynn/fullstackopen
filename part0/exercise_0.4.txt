@@ -1,0 +1,51 @@
+title Fullstackopen - Create a new Note
+Link to upstream diagram: https://www.websequencediagrams.com/cgi-bin/cdraw?lz=dGl0bGUgRnVsbHN0YWNrb3BlbiAtIENyZWF0ZSBhIG5ldyBOb3RlCgphY3RvciBBCkEtPkJyb3dzZXI6IGVudGVycyB3ZWIgYWRkcmVzcyBpbnRvIHRoZSBiAB8GCgAmBy0-U2VydmVyOiBIVFRQIEdFVCBodHRwczovL3N0dWRpZXMuY3MuaGVsc2lua2kuZmkvZXhhbXBsZWFwcC9ub3RlcwoAOwYtAHULUmV0dXJucwBrBXNpdGUgSFRNTC1jb2RlIAAzU21haW4uY3MAbRwAGwggc3R5bGUgZnJvbQCBFAkAOkpqAGIhanMgamF2YXNjcmlwdAB5DgCCChAKbm90ZSBvdmVyIACDUAgKVACDNgogc3RhcnRzIGV4ZWN1dGluZyBqcwCCXQUKdGhhdCByZXF1ZXN0cyBkYXRhLmpzb24AgWoLAINsBQAjBXMgZGlzcGxheQCDJgZjdXJyZW50IACDUwUgb24AghoKZW5kABEFCgCDc0UAgQwJAIQpE1t7IGNvbnRlbnQ6ICJIVE1MIGlzIGVhc3kiLCBkYXRlOiAiMjAyMC0xMC0xMyIgfSwgLi4uXQCCDiEAgiIGZQCFDgZldmVudCBoYW5kbACCAgcgcmVuZGVycwCBdAd0bwCCEQgAgW8LAIJ-E0EAhmMIAIcMBgCDLgVhbmQgc2VsZWN0cwoAhXwFYXZlIGJ1dHRvbgCCJiFQT1MAhlMtZXdfAIEMEACHSAcAhCcFAINkBgCBbg5wb3MAhBoFAIQiBmMAiEwFAIE4CG9iamVjdACBPQVhZGRzIGl0CgCILwdhcnJheQCEEQcAgVsGbgAbBSBiYWNrIHRvCgCFDwhpAIQvBnVwZGF0ZWQAhHUKAIQ3CwCDVR9OAIJACWRkZWQAgzg-AIV-JwCBHRUgCgCGIw8Ag1UFdGhlAIF_CHJlIAoAhjgHZWQgYWdhaW4gd2l0aAAeBgCEBwgKAIFCBQCJbwlvdHRvbSBvZgCDBgZhZwCGTww&s=default
+
+actor A
+A->Browser: enters web address into the browser
+Browser->Server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/notes
+Server-->Browser: Returns the site HTML-code to the browser
+Browser->Server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/main.css
+Server-->Browser: Returns main.css style from the site
+Browser->Server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/main.js
+Server-->Browser: Returns main.js javascript from the site to the browser
+
+note over Browser:
+The browser starts executing js-code
+that requests data.json from the server
+thats displays the current notes on the site
+end note
+
+Browser->Server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/data.json
+Server-->Browser: [{ content: "HTML is easy", date: "2020-10-13" }, ...]
+
+note over Browser:
+The browser executes the event handler
+that renders notes to display
+end note
+
+note over Browser:
+A enters a new note and selects
+the save button
+end note
+
+Browser->Server: HTTP POST https://studies.cs.helsinki.fi/exampleapp/new_note
+
+note over Server:
+The server executes the post req
+that creates a new object and adds it
+to the array notes and sends it back to
+browser in the updated data.json
+end note
+
+Server-->Browser: [{ content: "New note added", date: "2020-10-13" }, ...]
+
+note over Browser:
+The browser starts executing js-code
+that requests the updated data.json
+from the server and the notes are
+displayed again with the new note
+added to the bottom of the page
+end note
+
+
