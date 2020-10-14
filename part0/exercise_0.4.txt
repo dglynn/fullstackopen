@@ -34,7 +34,7 @@ note over Server:
 The server executes the post req
 that creates a new object and adds it
 to the array notes and sends it back to
-browser in the updated data.json
+the browser in the updated data.json
 end note
 
 Server-->Browser: [{ content: "New note added", date: "2020-10-13" }, ...]

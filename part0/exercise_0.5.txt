@@ -1,0 +1,24 @@
+title Ex 0.5 Fullstackopen - Open SPA site
+
+actor A
+A->Browser: enters web address into the browser
+Browser->Server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/spa
+Server-->Browser: Returns the site HTML-code to the browser
+Browser->Server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/main.css
+Server-->Browser: Returns main.css to the browser
+Browser->Server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/spa.js
+Server-->Browser: Returns spa.js javascript from the site to the browser
+
+note over Browser:
+The browser starts executing the spa.js code that
+requests data.json from the server and
+displays the current notes on the site
+end note
+
+Browser->Server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/data.json
+Server-->Browser: [{ content: "HTML is easy", date: "2020-10-13" }, ...]
+
+note over Browser:
+The browser executes the event handler
+that renders notes to display
+end note
