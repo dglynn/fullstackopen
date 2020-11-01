@@ -11,12 +11,11 @@ const Header = ({header}) => {
 }
 
 const Button = (props) => (
-  <button onClick={props.addClick}>
-    {props.text}
-  </button>
+  //console.log(props)
+  <button onClick={props.addClick}>{props.text}</button>
 )
 
-const Stats = ({stats}) => {
+const StatsHeader = ({stats}) => {
   //console.log(stats)
   return (
     <h1>
@@ -25,29 +24,18 @@ const Stats = ({stats}) => {
   )
 }
 
-const Total = (props) => {
+const Statistic = (props) => {
   //console.log(props)
-  return (
+  if (props.text === "percentage") {
+    return (
     <p>
-      good {props.good}
-      <br />
-      neutral {props.neutral}
-      <br />
-      bad {props.bad}
-      <br />
-      all {props.good + props.neutral + props.bad}
-      <br />
-      average {(props.good - props.bad) / (props.good + props.neutral + props.bad)}
-      <br />
-      percentage {props.good / (props.good + props.neutral + props.bad) * 100} %
+      {props.text} {props.value}%
     </p>
   )
-}
-
-const NoFeedback = (props) => {
+  }
   return (
     <p>
-      No feedback given
+      {props.text} {props.value}
     </p>
   )
 }
@@ -57,16 +45,19 @@ const Statistics = (props) => {
   if (props.good || props.neutral || props.bad > 0) {
     return (
       <>
-        <Stats stats={props.stats}/>
-        <Total good={props.good} neutral={props.neutral} bad={props.bad} />
+        <Statistic text="good" value={props.good} />
+        <Statistic text="neutral" value={props.neutral} />
+        <Statistic text="bad" value={props.bad} />
+        <Statistic text="all" value={props.good + props.neutral + props.bad} />
+        <Statistic text="average" value={(props.good - props.bad) / (props.good + props.neutral + props.bad)} />
+        <Statistic text="percentage" value={props.good / (props.good + props.neutral + props.bad) * 100} />
       </>
     )
   }
   return (
-    <>
-      <Stats stats={props.stats}/>
-      <NoFeedback />
-    </>
+    <p>
+      No feedback
+    </p>
   )
 }
 
@@ -84,7 +75,9 @@ const App = () => {
       <Button addClick={() => setGood(good + 1)} text="good" />
       <Button addClick={() => setNeutral(neutral + 1)} text="neutral" />
       <Button addClick={() => setBad(bad + 1)} text="bad" />
-      <Statistics stats={stats} good={good} neutral={neutral} bad={bad} />
+      <StatsHeader stats={stats}/>
+      <Statistics good={good} neutral={neutral} bad={bad}
+      />
     </div>
   )
 }
