@@ -26,7 +26,7 @@ const Stats = ({stats}) => {
 }
 
 const Total = (props) => {
-  console.log(props)
+  //console.log(props)
   return (
     <p>
       good {props.good}
@@ -34,6 +34,12 @@ const Total = (props) => {
       neutral {props.neutral}
       <br />
       bad {props.bad}
+      <br />
+      all {props.good + props.neutral + props.bad}
+      <br />
+      average {(props.good - props.bad) / (props.good + props.neutral + props.bad)}
+      <br />
+      positive {props.good / (props.good + props.neutral + props.bad) * 100} %
     </p>
   )
 }
