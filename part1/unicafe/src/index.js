@@ -44,12 +44,28 @@ const Total = (props) => {
   )
 }
 
+const NoFeedback = (props) => {
+  return (
+    <p>
+      No feedback given
+    </p>
+  )
+}
+
 const Statistics = (props) => {
   //console.log(props)
+  if (props.good || props.neutral || props.bad > 0) {
+    return (
+      <>
+        <Stats stats={props.stats}/>
+        <Total good={props.good} neutral={props.neutral} bad={props.bad} />
+      </>
+    )
+  }
   return (
     <>
       <Stats stats={props.stats}/>
-      <Total good={props.good} neutral={props.neutral} bad={props.bad} />
+      <NoFeedback />
     </>
   )
 }
