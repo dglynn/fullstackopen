@@ -28,15 +28,23 @@ const Statistic = (props) => {
   //console.log(props)
   if (props.text === "percentage") {
     return (
-    <p>
-      {props.text} {props.value}%
-    </p>
+      <table>
+        <tbody>
+          <tr>
+            <td>{props.text}</td><td>{props.value}%</td>
+          </tr>
+        </tbody>
+      </table>
   )
   }
   return (
-    <p>
-      {props.text} {props.value}
-    </p>
+    <table>
+      <tbody>
+        <tr>
+          <td>{props.text}</td><td>{props.value}</td>
+        </tr>
+      </tbody>
+    </table>
   )
 }
 
