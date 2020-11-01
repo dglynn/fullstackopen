@@ -44,6 +44,15 @@ const Total = (props) => {
   )
 }
 
+const Statistics = (props) => {
+  //console.log(props)
+  return (
+    <>
+      <Stats stats={props.stats}/>
+      <Total good={props.good} neutral={props.neutral} bad={props.bad} />
+    </>
+  )
+}
 
 const App = () => {
   // save clicks of each button to its own state
@@ -59,8 +68,7 @@ const App = () => {
       <Button addClick={() => setGood(good + 1)} text="good" />
       <Button addClick={() => setNeutral(neutral + 1)} text="neutral" />
       <Button addClick={() => setBad(bad + 1)} text="bad" />
-      <Stats stats={stats} />
-      <Total good={good} neutral={neutral} bad={bad} />
+      <Statistics stats={stats} good={good} neutral={neutral} bad={bad} />
     </div>
   )
 }
