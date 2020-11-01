@@ -39,7 +39,7 @@ const Total = (props) => {
       <br />
       average {(props.good - props.bad) / (props.good + props.neutral + props.bad)}
       <br />
-      positive {props.good / (props.good + props.neutral + props.bad) * 100} %
+      percentage {props.good / (props.good + props.neutral + props.bad) * 100} %
     </p>
   )
 }
