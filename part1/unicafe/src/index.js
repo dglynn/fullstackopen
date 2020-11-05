@@ -26,17 +26,17 @@ const StatsHeader = ({stats}) => {
 
 const Statistic = (props) => {
   //console.log(props)
-  if (props.text === "percentage") {
-    return (
-      <table>
-        <tbody>
-          <tr>
-            <td>{props.text}</td><td>{props.value}%</td>
-          </tr>
-        </tbody>
-      </table>
-  )
-  }
+  // if (props.text === "percentage") {
+  //   return (
+  //     <table>
+  //       <tbody>
+  //         <tr>
+  //           <td>{props.text}</td><td>{props.value}%</td>
+  //         </tr>
+  //       </tbody>
+  //     </table>
+  // )
+  // }
   return (
     <table>
       <tbody>
@@ -50,15 +50,17 @@ const Statistic = (props) => {
 
 const Statistics = (props) => {
   //console.log(props)
+  const total = props.good + props.neutral + props.bad
+  const percentValue = `${props.good / (total) * 100} %`
   if (props.good || props.neutral || props.bad > 0) {
     return (
       <>
         <Statistic text="good" value={props.good} />
         <Statistic text="neutral" value={props.neutral} />
         <Statistic text="bad" value={props.bad} />
-        <Statistic text="all" value={props.good + props.neutral + props.bad} />
-        <Statistic text="average" value={(props.good - props.bad) / (props.good + props.neutral + props.bad)} />
-        <Statistic text="percentage" value={props.good / (props.good + props.neutral + props.bad) * 100} />
+        <Statistic text="all" value={total} />
+        <Statistic text="average" value={(props.good - props.bad) / (total)} />
+        <Statistic text="percentage" value={percentValue} />
       </>
     )
   }
@@ -84,8 +86,7 @@ const App = () => {
       <Button addClick={() => setNeutral(neutral + 1)} text="neutral" />
       <Button addClick={() => setBad(bad + 1)} text="bad" />
       <StatsHeader stats={stats}/>
-      <Statistics good={good} neutral={neutral} bad={bad}
-      />
+      <Statistics good={good} neutral={neutral} bad={bad} />
     </div>
   )
 }
