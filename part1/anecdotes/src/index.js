@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom'
 
 const Anecdote = props => <div>{props.anecdotes}</div>
 
+const Vote = props => <div>has {props.votes} votes</div>
+
 const Button = (props) => (
   <button onClick={props.onClick}>
     {props.text}
@@ -11,16 +13,22 @@ const Button = (props) => (
 
 const App = (props) => {
   const [selected, setSelected] = useState(0)
-  // let random = Math.floor(Math.random()*(max-min+1)+min);
-  const max = 5
-  const min = 0
-  const random = () => Math.floor(Math.random() * (max - min + 1) + min)
+  const random = () => Math.floor(Math.random() * anecdotes.length)
   // console.log(selected)
+  const [votes, setVotes] = useState(new Array(6).fill(0))
+  const addVotes = (selected) => {
+    const vote = [...votes]
+    vote[selected] += 1
+    setVotes(vote)
+  }
+  // console.log(votes)
 
   return (
     <div>
       <Anecdote anecdotes={props.anecdotes[selected]} />
-      <Button onClick={() => setSelected(random())} text="random anecdote" />
+      <Vote votes={votes[selected]} />
+      <Button onClick={() => addVotes(selected)} text="vote" />
+      <Button onClick={() => setSelected(random())} text="next anecdote" />
     </div>
   )
 }
