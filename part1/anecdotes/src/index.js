@@ -15,7 +15,7 @@ const App = (props) => {
   const max = 5
   const min = 0
   const random = () => Math.floor(Math.random() * (max - min + 1) + min)
-  console.log(selected)
+  // console.log(selected)
 
   return (
     <div>
