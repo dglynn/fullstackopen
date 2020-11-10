@@ -21,11 +21,11 @@ const App = () => {
         exercises: 14,
         id: 3
       },
-      // {
-      //   name: 'State of another component',
-      //   exercises: 13,
-      //   id: 4
-      // }
+      {
+        name: 'Redux',
+        exercises: 13,
+        id: 4
+      }
     ]
   }
 
