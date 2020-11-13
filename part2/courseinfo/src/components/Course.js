@@ -4,13 +4,13 @@ import Content from './Content'
 import Total from './Total'
 
 const Course = ({course}) => {
-  //console.log("I am course log", course)
+  //console.log("I am the course.js log",course)
   return (
-    <div>
-      <Header course={course} />
-      <Content course={course} />
-      <Total course={course} />
-    </div>
+      <div>
+        <Header course={course} />
+        <Content course={course} />
+        <Total course={course} />
+      </div>
   )
 }
 
