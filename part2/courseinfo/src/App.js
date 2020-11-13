@@ -2,7 +2,8 @@ import React from 'react'
 import Course from './components/Course'
 
 const App = () => {
-  const course = {
+  const courses = [
+  {
     id: 1,
     name: 'Half Stack application development',
     parts: [
@@ -27,9 +28,35 @@ const App = () => {
         id: 4
       }
     ]
+  },
+  {
+    id: 2,
+    name: 'Node.js',
+    parts: [
+      {
+        name: 'Routing',
+        exercises: 3,
+        id: 1
+      },
+      {
+        name: 'Middlewares',
+        exercises: 7,
+        id: 2
+      }
+    ]
   }
+]
+//console.log("App works......")
+//console.log("I am the app.js courses object", courses)
+//console.log(courses.map(course => course))
 
-  return <Course course={course} />
+  return (
+    <div>
+    <h1><strong>Web development curriculum</strong></h1>
+    {courses.map((course) =>
+      <Course key={course.id} course={course} />)}
+    </div>
+  )
 }
 
 export default App
