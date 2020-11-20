@@ -29,7 +29,7 @@ const App = () => {
     //If the length of duplicateName > 0 we have a dupe
     // and send alert to the screen
     if (duplicateName.length > 0) {
-      alert(newName + " is already in the phonebook")
+      alert(`${newName} is already added to phonebook`)
     } else {
       setPersons(persons.concat(addNewName))
     }
