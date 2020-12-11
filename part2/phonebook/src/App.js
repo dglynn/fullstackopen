@@ -3,15 +3,17 @@ import Person from "./components/Person";
 
 const App = () => {
   const [persons, setPersons] = useState([
-    {
-      name: "Arto Hellas",
-      number: "123456789",
-    },
+    { name: "Arto Hellas", number: "040-123456" },
+    { name: "Ada Lovelace", number: "39-44-5323523" },
+    { name: "Dan Abramov", number: "12-43-234345" },
+    { name: "Mary Poppendieck", number: "39-23-6423122" },
   ]);
+
   //console.log(persons)
   const [newName, setNewName] = useState("");
   const [newNumber, setNewNumber] = useState("");
-  console.log("I am newName ", newName);
+  const [searchValue, setSearchValue] = useState("");
+  //console.log("I am newName ", newName);
 
   const handleAddName = (event) => {
     //console.log(event.target.value)
@@ -48,9 +50,17 @@ const App = () => {
     setNewNumber("");
   };
 
+  const searchPerson = (event) => {
+    console.log("I am the search person event handler", event.target.value);
+    setSearchValue(event.target.value);
+  };
+  console.log("I am the searchValue ", searchValue);
+
   return (
     <div>
       <h2>Phonebook</h2>
+      <input value={searchValue} onChange={searchPerson} />
+      <h2>add a new</h2>
       <form onSubmit={addPerson}>
         <div>
           name:
@@ -66,9 +76,13 @@ const App = () => {
       </form>
       <h2>Numbers</h2>
       <div>
-        {persons.map((person) => (
-          <Person key={person.name} person={person} />
-        ))}
+        {persons
+          .filter((person) =>
+            person.name.toUpperCase().includes(searchValue.toUpperCase())
+          )
+          .map((person) => (
+            <Person key={person.name} person={person} />
+          ))}
       </div>
     </div>
   );
