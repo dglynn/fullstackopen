@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import Person from "./components/Person";
+import Persons from "./components/Persons";
+import Filter from "./components/Filter";
+import PersonForm from "./components/PersonForm";
 
 const App = () => {
   const [persons, setPersons] = useState([
@@ -10,80 +12,41 @@ const App = () => {
   ]);
 
   //console.log(persons)
-  const [newName, setNewName] = useState("");
-  const [newNumber, setNewNumber] = useState("");
   const [searchValue, setSearchValue] = useState("");
-  //console.log("I am newName ", newName);
 
-  const handleAddName = (event) => {
-    //console.log(event.target.value)
-    setNewName(event.target.value);
-  };
-
-  const handleAddNumber = (event) => {
-    //console.log(event.target.value)
-    setNewNumber(event.target.value);
-  };
-
-  const addPerson = (event) => {
-    event.preventDefault();
-    //console.log('button clicked', event.target)
-    //console.log("I am the persons array", persons)
-    //console.log("I am the newName const",newName)
-    const addNewPerson = {
-      name: newName,
-      number: newNumber,
-    };
+  const addPerson = (person) => {
     // Create a function to compare if the persons.name array matches
-    // the newName we are trying to add
-    const duplicateName = persons.filter((o) => o.name === newName);
+    // the person.name we are trying to add
+    const duplicateName = persons.filter((o) => o.name === person.name);
     //console.log("I am duplicateName ",duplicateName)
 
     //If the length of duplicateName > 0 we have a dupe
     // and send alert to the screen
     if (duplicateName.length > 0) {
-      alert(`${newName} is already added to phonebook`);
+      alert(`${person.name} is already added to phonebook`);
     } else {
-      setPersons(persons.concat(addNewPerson));
+      setPersons(persons.concat(person));
     }
-    setNewName("");
-    setNewNumber("");
   };
 
-  const searchPerson = (event) => {
-    console.log("I am the search person event handler", event.target.value);
-    setSearchValue(event.target.value);
-  };
   console.log("I am the searchValue ", searchValue);
+  const filterPersons = persons.filter((person) =>
+    person.name.toUpperCase().includes(searchValue.toUpperCase())
+  );
 
   return (
     <div>
       <h2>Phonebook</h2>
-      <input value={searchValue} onChange={searchPerson} />
-      <h2>add a new</h2>
-      <form onSubmit={addPerson}>
-        <div>
-          name:
-          <input value={newName} onChange={handleAddName} />
-        </div>
-        <div>
-          number:
-          <input value={newNumber} onChange={handleAddNumber} type="number" />
-        </div>
-        <div>
-          <button type="submit">add</button>
-        </div>
-      </form>
+
+      <Filter onFilter={setSearchValue} />
+
+      <h3>Add a new</h3>
+
+      <PersonForm onAdd={addPerson} />
+
       <h2>Numbers</h2>
-      <div>
-        {persons
-          .filter((person) =>
-            person.name.toUpperCase().includes(searchValue.toUpperCase())
-          )
-          .map((person) => (
-            <Person key={person.name} person={person} />
-          ))}
-      </div>
+
+      <Persons persons={filterPersons} />
     </div>
   );
 };
