@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const regex = /^(\d+)-(\d+)-(\d+)*$/;
+const regex = /^\d+-\d+-\d+$/;
 
 const PersonForm = ({ onAdd }) => {
   const [newName, setNewName] = useState("");
