@@ -16,6 +16,20 @@ updates:
     schedule:
       interval: "daily"
     open-pull-requests-limit: 10
+    groups:
+      npm:
+        patterns:
+          - "*"
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: daily
+    open-pull-requests-limit: 10
+    groups:
+      github-actions:
+        patterns:
+          - "*"
 
   # Enable version updates for Docker
   - package-ecosystem: "docker"
@@ -25,3 +39,7 @@ updates:
     schedule:
       interval: "daily"
     open-pull-requests-limit: 10
+    roups:
+      docker:
+        patterns:
+          - "*"
